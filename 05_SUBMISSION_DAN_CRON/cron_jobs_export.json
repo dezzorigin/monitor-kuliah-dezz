@@ -1,0 +1,127 @@
+{
+  "jobs": [
+    {
+      "id": "1cd21a06adcb",
+      "name": "monitor-tugas-dezz",
+      "prompt": "MONITOR TUGAS & PENGUMUMAN \u2014 Dezz (monitor-kuliah-soul)\n\nKamu adalah monitor kuliah Dezz. Jalankan tiap 06.00, 12.00, 18.00, 00.00 WIB.\n\nSUMBER YANG DICEK:\nA. Moodle USK (https://elearning.usk.ac.id) \u2014 via browser_exec\nB. Google Classroom (https://classroom.google.com) \u2014 via browser_exec, sesi Google tersimpan. Kalau ada 2 akun/profile, cek keduanya.\n\nPROSEDUR MOODLE:\n1. Buka https://elearning.usk.ac.id/my/courses.php.\n2. KALAU diarahkan ke halaman login (session expired \u2014 ini sering terjadi, WAJIB handle):\n   - Ambil password dari vault item `vault_e07e226cbdae` via Python:\n     import sys, json; sys.path.insert(0, '/opt/hermes')\n     from agent.vault_store import get_vault_store\n     vs = get_vault_store()\n     blob = vs._fernet().decrypt(vs._vault_path.read_bytes())\n     data = json.loads(blob.decode())\n     pw = next(i['secret']['password'] for i in data['items'] if i['id']=='vault_e07e226cbdae')\n   - Isi #username = 250810701100090 dan #password = pw via JS native setter + dispatch input event\n   - Klik button[type=submit], tunggu redirect ke /my/\n3. Ambil semua course link (course/view.php?id=...).\n4. Untuk tiap course: buka halaman course + /mod/assign/index.php?id=<courseid> dan /mod/forum/ kalau ada \u2192 kumpulkan assignment (judul, due date), quiz, forum announcement terbaru.\n5. Di Moodle juga ada kalender/linimasa: cek https://elearning.usk.ac.id/my/ bagian timeline/upcoming events \u2014 lebih efisien buat deadline detection.\n\nPROSEDUR GOOGLE CLASSROOM:\n1. Buka https://classroom.google.com \u2014 kalau diarahkan ke login Google dan tidak ada sesi tersimpan \u2192 lapor 'SESI GCR EXPIRED, butuh re-login manual' dan skip bagian ini (jangan coba login sendiri).\n2. List semua class aktif, per class cek stream + classwork \u2192 tugas baru, materi, pengumuman, deadline.\n3. Kalau ada multiple account (account switcher), cek satu per satu.\n\nDEDUPE & LAPORAN:\n- Bandingkan dengan /opt/data/monitor-kuliah/state.json (map tugas_id \u2192 {deadline, hash_instruksi, last_reported}). Item dengan hash identik \u2192 skip.\n- Ada item baru/perubahan \u2192 lapor format singkat: `SUMBER | MK | item | deadline | status | aksi yg dibutuhkan dari Dezz`.\n- Update state.json tiap run. Screenshot bukti ke /opt/data/monitor-kuliah/evidence/ kalau ada item baru.\n- Nggak ada perubahan \u2192 output 'Tidak ada tugas/pengumuman baru'.\n\nATURAN KERAS:\n- JANGAN submit/upload apapun ke sistem kampus.\n- JANGAN klik tombol kumpulkan/submit/quiz start.\n- Kuis/ujian \u2192 laporkan saja, Dezz yang putuskan.\n- Password tidak boleh muncul di laporan/log \u2014 pakai vault seperti contoh.",
+      "skills": [
+        "productivity/monitor-kuliah-soul"
+      ],
+      "skill": "productivity/monitor-kuliah-soul",
+      "model": "swe-2-high",
+      "provider": "devin",
+      "provider_snapshot": "custom",
+      "model_snapshot": "swe-2-high",
+      "base_url": "http://ai-thing-devin-gateway-aq7edi-91a673-100-88-43-145.sslip.io",
+      "script": null,
+      "no_agent": false,
+      "monitor_script": null,
+      "monitor_url": null,
+      "monitor_state": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23,5,11,17 * * *",
+        "display": "0 23,5,11,17 * * *"
+      },
+      "schedule_display": "0 23,5,11,17 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 68
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-09-27T15:11:50.825883+00:00",
+      "next_run_at": "2026-10-16T05:00:00+00:00",
+      "last_run_at": "2026-10-16T02:05:25.135238+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: HTTP 200: Devin stream error permission_denied: an internal error occurred (trace ID: 0f7cd4c46beb7bb876cd0980fd8ef598)",
+      "last_delivery_error": null,
+      "last_delivery_unverified": null,
+      "failure_streak": 1,
+      "deliver": "origin",
+      "origin": {
+        "platform": "discord",
+        "chat_id": "1553776508622077973",
+        "chat_name": "VM 1 / #monitor-kuliah-dezz / Monitor kuliah & tugas Dezz",
+        "thread_id": "1553776508622077973",
+        "user_id": "972317297366687815",
+        "scope_id": "1551985598288502794"
+      },
+      "enabled_toolsets": null,
+      "workdir": "/opt/data/monitor-kuliah",
+      "last_dispatch": {
+        "scheduled_at": "2026-10-15T23:00:00+00:00",
+        "dispatched_at": "2026-10-16T02:04:59.539043+00:00",
+        "lateness_seconds": 11099.5,
+        "kind": "catch_up"
+      },
+      "fire_claim": null
+    },
+    {
+      "id": "b033d7185cc3",
+      "name": "absen-watcher-dezz",
+      "prompt": "ABSEN WATCHER \u2014 Dezz + Muhammad Rizki (monitor-kuliah-soul)\n\nKamu watcher absensi SIMKULIAH untuk DUA akun:\n- Dezz: NPM 250810701100090 \u2192 vault handle vault_3f284af2e789\n- Muhammad Rizki (teman Dezz): NPM 250810701100049 \u2192 vault handle vault_b37c19ed6f0b\n\nKredensial HANYA via browser_vault_fill \u2014 jangan pernah tulis/minta password.\n\nSetiap run (dipicu monitor gate absen_gate.py; output gate ada di prompt):\n\n1. Parse output gate: daftar kode MK aktif untuk Dezz (jadwal.json = jadwal Dezz). Rizki diasumsikan jadwal sama \u2014 halaman absensinya yang menentukan.\n2. Untuk tiap akun (Dezz dulu, lalu Rizki):\n   a. Buka https://simkuliah.usk.ac.id \u2014 kalau masih login akun lain, logout dulu (goto https://simkuliah.usk.ac.id/index.php/login/logout).\n   b. Login: isi username (NPM), baca captcha dari screenshot (crop elemen #captcha-img; kalau vision menolak, pre-process threshold PIL lalu coba lagi \u2014 sudah terbukti jalan), password via browser_vault_fill handle di atas, submit.\n   c. Buka /index.php/absensi. Kalau 'Belum masuk waktu absen' \u2192 akun ini belum ada sesi, skip.\n   d. Kalau 'Anda sudah absen' \u2192 catat done, skip.\n   e. Kalau 'Dosen belum absen' \u2192 belum bisa, coba lagi tick berikutnya.\n   f. Kalau ada batas waktu (dosen sudah absen) \u2192 klik 'Konfirmasi Kehadiran' (button id konfirmasi-kehadiran-*) lalu klik 'Konfirmasi' di dialog. Verifikasi teks jadi 'Anda sudah absen', screenshot.\n3. Simpan state per akun di /opt/data/monitor-kuliah/absen_state.json: field done = ['SINF2015'], done_rizki = [...], per tanggal hari ini. Kalau format lama beda, migrasi pelan-pelan.\n4. Screenshot bukti ke /opt/data/monitor-kuliah/evidence/absen_<KODE>_<tanggal>_<akun>.png\n5. Laporan akhir (yang dikirim ke channel): ringkas \u2014 MK | akun | status (SUKSES/dosen-belum-absen/belum-waktu) | next check. Kalau semua 'idle'/tidak ada aksi, cukup satu baris atau kosong.\n\nPENTING:\n- Time-critical: kalau batas absen < 5 menit lagi, kerjakan akun itu DULUAN sebelum akun lain.\n- Jangan submit tugas/kuis. Absen saja.\n- Gagal absen setelah window habis \u2192 lapor GAGAL + alasan, jangan diam.",
+      "skills": [
+        "productivity/monitor-kuliah-soul"
+      ],
+      "skill": "productivity/monitor-kuliah-soul",
+      "model": "swe-2-high",
+      "provider": "devin",
+      "provider_snapshot": "custom",
+      "model_snapshot": "swe-2-high",
+      "base_url": "http://ai-thing-devin-gateway-aq7edi-91a673-100-88-43-145.sslip.io",
+      "script": null,
+      "no_agent": false,
+      "monitor_script": "absen_gate.sh",
+      "monitor_url": null,
+      "monitor_state": {
+        "last_output_hash": "c3f7f3ed7d9fabb515b841a37274046d44df38c2c3bae848f6e1591c850e21b1",
+        "last_changed_at": "2026-10-16T04:35:29.487255+00:00"
+      },
+      "context_from": null,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 10,
+        "display": "every 10m"
+      },
+      "schedule_display": "every 10m",
+      "repeat": {
+        "times": null,
+        "completed": 1055
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-09-27T15:11:58.448077+00:00",
+      "next_run_at": "2026-10-16T04:45:43.083300+00:00",
+      "last_run_at": "2026-10-16T04:35:43.083300+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: HTTP 200: Devin stream error permission_denied: an internal error occurred (trace ID: 6507a317b73a12e67f491b7187e96997)",
+      "last_delivery_error": null,
+      "last_delivery_unverified": null,
+      "failure_streak": 11,
+      "deliver": "origin",
+      "origin": {
+        "platform": "discord",
+        "chat_id": "1553776508622077973",
+        "chat_name": "VM 1 / #monitor-kuliah-dezz / Monitor kuliah & tugas Dezz",
+        "thread_id": "1553776508622077973",
+        "user_id": "972317297366687815",
+        "scope_id": "1551985598288502794"
+      },
+      "enabled_toolsets": null,
+      "workdir": "/opt/data/monitor-kuliah",
+      "last_dispatch": {
+        "scheduled_at": "2026-10-16T04:34:38.607711+00:00",
+        "dispatched_at": "2026-10-16T04:35:28.810288+00:00",
+        "lateness_seconds": 50.2,
+        "kind": "on_time"
+      },
+      "fire_claim": null
+    }
+  ]
+}
