@@ -5,8 +5,7 @@
 | Field | Nilai |
 |---|---|
 | Nama Proyek | Monitor Kuliah Dezz |
-| Repo | dezzorigin/monitor-kuliah-dezz |
-| Tech Stack | Mixed / Static |
+| Tech Stack | Python |
 | Status | Dalam pengembangan |
 | Penanggung Jawab | Nabil Aulia Dika |
 | Versi Dokumen | 1.0 |
@@ -14,7 +13,7 @@
 
 ## 2. Latar Belakang
 
-Proyek ini dikembangkan sebagai bagian dari portofolio dan kebutuhan operasional. Dokumen ini mengikuti standar PRD nasional untuk memastikan ruang lingkup, fitur, dan kriteria keberhasilan terdefinisi dengan jelas.
+Proyek ini dikembangkan sebagai bagian dari portofolio dan kebutuhan operasional. Dokumen ini mengikuti standar PRD nasional agar ruang lingkup, fitur, dan kriteria keberhasilan terdefinisi dengan jelas.
 
 ## 3. Masalah yang Diselesaikan
 
@@ -40,12 +39,13 @@ Pengguna membutuhkan solusi digital yang efisien, terukur, dan mudah dipelihara 
 ## 6. Fitur & Persyaratan Fungsional
 
 Struktur proyek (file/direktori utama):
-- .gitignore
 - 01_SOUL_AND_CONFIG/
 - 02_ABSENSI_SIMKULIAH/
 - 03_ELEARNING_MOODLE/
 - 04_MENGERJAKAN_TUGAS_DAN_PDF/
 - 05_SUBMISSION_DAN_CRON/
+- LICENSE
+- PRD.md
 - README.md
 
 ## 7. Persyaratan Non-Fungsional
@@ -57,7 +57,7 @@ Struktur proyek (file/direktori utama):
 
 ## 8. Arsitektur & Tech Stack
 
-Mixed / Static
+Python
 
 ## 9. Milestone / Roadmap
 
