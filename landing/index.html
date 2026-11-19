@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor Kuliah Dezz — Buku Log Arsip Absensi</title>
+<meta name="description" content="Buku log otomasi monitor kuliah Dezz: absensi SIMKULIAH USK otomatis, pantau tugas Moodle dan Google Classroom, draft PDF siap kumpul. 13 MK, 21 SKS, S1 Sistem Informasi.">
+<meta property="og:title" content="Monitor Kuliah Dezz — Buku Log Arsip Absensi">
+<meta property="og:description" content="Otomasi absensi SIMKULIAH + monitor Moodle & Google Classroom. 13 MK, 21 SKS, S1 Sistem Informasi USK.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://monitor-kuliah-dezz.pages.dev/">
+<meta property="og:image" content="https://monitor-kuliah-dezz.pages.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor Kuliah Dezz — Buku Log Arsip Absensi">
+<meta name="twitter:description" content="Otomasi absensi SIMKULIAH + monitor Moodle & Google Classroom. 13 MK, 21 SKS, S1 Sistem Informasi USK.">
+<meta name="twitter:image" content="https://monitor-kuliah-dezz.pages.dev/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Libre+Franklin:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ledger">
+  <div class="holes" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="cover">
+    <p class="kicker">Buku Log &nbsp;·&nbsp; Arsip Absensi &nbsp;·&nbsp; USK</p>
+    <h1>Monitor Kuliah<br>Dezz</h1>
+    <p class="stamp-no" aria-label="Nomor halaman 047">No. 047</p>
+    <p class="cover-sub">Otomasi absensi SIMKULIAH + monitor Moodle &amp; Google Classroom.
+      Buku ini mencatat apa yang sudah dikerjakan mesin — bukan janji.</p>
+    <dl class="register-meta">
+      <div><dt>Pemilik</dt><dd>Nabil Aulia Dika (Dezz)</dd></div>
+      <div><dt>NPM</dt><dd>250810701100090</dd></div>
+      <div><dt>Program studi</dt><dd>S1 Sistem Informasi — Universitas Syiah Kuala</dd></div>
+      <div><dt>Semester</dt><dd>Ganjil 2026/2027</dd></div>
+      <div><dt>Beban</dt><dd>13 MK · 21 SKS</dd></div>
+      <div><dt>Dibuka</dt><dd id="today-line">—</dd></div>
+    </dl>
+  </header>
+
+  <section class="status-strip" aria-label="Keadaan buku log">
+    <h2>Keadaan buku log <span class="contoh">(contoh — dari template state repo)</span></h2>
+    <ul>
+      <li><span class="lbl">Cek terakhir</span> <span>15 Okt 2026, 16:48 WIB</span></li>
+      <li><span class="lbl">Absen terakhir</span> <span>SINF2023 Sistem Operasi P9, kelas B — masuk 16:47 WIB, batas 17:15</span></li>
+      <li><span class="lbl">Google Classroom</span> <span class="warn">Sesi EXPIRED — butuh re-login manual</span></li>
+      <li><span class="lbl">Draft menunggu</span> <span>Tugas Interpolasi Komnum — buka 6 Nov 18:59, tenggat 7 Nov 09:59</span></li>
+    </ul>
+  </section>
+
+  <section class="log" aria-label="Linimasa entri log">
+    <div class="log-head">
+      <h2>Linimasa entri</h2>
+      <p class="contoh">Entri di bawah ini contoh dari template <code>state.json</code> /
+        <code>absen_state.json</code> di repo — tanggal dan isinya asli dari
+        catatan operasi, bukan angka karangan.</p>
+      <div class="filters" role="group" aria-label="Saring entri log">
+        <button type="button" data-filter="semua" class="active" aria-pressed="true">Semua</button>
+        <button type="button" data-filter="absensi" aria-pressed="false">Absensi</button>
+        <button type="button" data-filter="tugas" aria-pressed="false">Tugas</button>
+        <button type="button" data-filter="sistem" aria-pressed="false">Sistem</button>
+      </div>
+      <p class="today-note" id="today-note"></p>
+    </div>
+
+    <article class="log-entry" data-cat="absensi">
+      <p class="entry-time"><time datetime="2026-10-15T16:48">15 Okt 2026<br>16:48 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Absensi · SINF2023</p>
+        <h3>Sistem Operasi P9, kelas B — absen masuk</h3>
+        <p>POST <code>konfirmasi_kehadiran</code> → <code>success</code>, 16:48 WIB.
+          Akun Rizki ikut absen di sesi yang sama. Batas absen 17:15.</p>
+        <p class="stamp hadir">HADIR</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="absensi">
+      <p class="entry-time"><time datetime="2026-10-15T16:47">15 Okt 2026<br>16:47 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Absensi · SINF2023</p>
+        <h3>Dezz terverifikasi sudah absen</h3>
+        <p>Halaman absensi SIMKULIAH membalas “Anda sudah absen”.
+          Dicatat ke <code>absen_state.json</code>, gerbang hari itu kembali idle.</p>
+        <p class="stamp hadir">HADIR</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="tugas">
+      <p class="entry-time"><time datetime="2026-10-15T06:03">15 Okt 2026<br>06:03 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Tugas · Komputasi Numerik A</p>
+        <h3>Tugas Interpolasi — draft siap, menunggu dibuka</h3>
+        <p>Draft PDF selesai (Latihan 6.6 soal 1–4, Lagrange orde 4).
+          Kumpul dibuka 6 Nov 18:59, tenggat 7 Nov 09:59. Status:
+          <strong>DRAFT_READY_WAITING_OPEN</strong> — belum dikirim, menunggu konfirmasi.</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="tugas">
+      <p class="entry-time"><time datetime="2026-10-13T01:13">13 Okt 2026<br>01:13 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Tugas · PBO A</p>
+        <h3>Latihan Inheritance — submitted for grading</h3>
+        <p>File <code>Latihan_Inheritance_PBO.pdf</code> (komposisi, LineSub,
+          Point3D) dikumpulkan ke Moodle setelah Dezz mengonfirmasi draft.</p>
+        <p class="stamp terkumpul">TERKUMPUL</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="tugas">
+      <p class="entry-time"><time datetime="2026-10-13T00:23">13 Okt 2026<br>00:23 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Tugas · PBO A</p>
+        <h3>Latihan Getter Setter — submitted for grading</h3>
+        <p>File <code>Latihan_Getter_Setter_PBO.pdf</code> (enkapsulasi, validasi
+          IPK 0.0–4.0) dikumpulkan ke Moodle setelah Dezz mengonfirmasi draft.</p>
+        <p class="stamp terkumpul">TERKUMPUL</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="sistem">
+      <p class="entry-time"><time datetime="2026-10-16T00:00">16 Okt 2026<br>00:00 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Sistem · Google Classroom</p>
+        <h3>Sesi Classroom kedaluwarsa</h3>
+        <p>Dialihkan ke halaman sign-in Google. Monitor melapor dan melewati
+          bagian ini — tidak mencoba login sendiri.</p>
+        <p class="stamp perlu">PERLU LOGIN</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="tugas">
+      <p class="entry-time"><time datetime="2026-09-28T11:05">28 Sep 2026<br>11:05 WIB</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Tugas · Basis Data II B</p>
+        <h3>Kuis 1 &amp; Kuis 2 — CLOSED</h3>
+        <p>Review Basis Data dan SQL sudah ditutup 18 Sep 06:53. Kuis hanya
+          dilaporkan — tidak pernah dikerjakan otomatis.</p>
+      </div>
+    </article>
+
+    <article class="log-entry" data-cat="tugas">
+      <p class="entry-time"><time datetime="2026-10-03T00:00">3 Okt 2026</time></p>
+      <div class="entry-body">
+        <p class="entry-cat">Tugas · Komputasi Numerik A</p>
+        <h3>TUGAS 01 — hidden, dikumpulkan via departemen</h3>
+        <p>Aktivitas disembunyikan dosen per 3 Okt. Dicatat sebagai
+          <code>hidden</code> di state — bukan error parsing.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="how" aria-label="Cara kerja monitor">
+    <h2>Cara kerja monitor</h2>
+    <ol>
+      <li><strong>01 — Gerbang.</strong> <code>absen_gate.py</code> dicek tiap
+        10 menit. Di luar jam kuliah keluarannya <code>idle</code> dan agen
+        tidak dibangunkan; 10 menit sebelum kelas, gerbang berubah dan agen jalan.</li>
+      <li><strong>02 — Login + captcha.</strong> <code>simkuliah_login.py</code>
+        login pakai <code>requests.Session</code> (captcha terikat sesi) dan
+        membaca captcha 5 digit dengan <code>ddddocr</code> lokal, retry sampai 6 kali.</li>
+      <li><strong>03 — Konfirmasi langsung.</strong> <code>absen_run.py</code>
+        mengekstrak 7 parameter dari script inline tombol, lalu POST langsung ke
+        <code>konfirmasi_kehadiran</code> — dialog SweetAlert yang tidak stabil
+        dilewati, bukan diklik.</li>
+      <li><strong>04 — Catat + lapor.</strong> Hasil ditulis ke
+        <code>absen_state.json</code>; tugas baru dideduplikasi lewat hash
+        instruksi di <code>state.json</code> supaya tidak dilaporkan berulang.</li>
+    </ol>
+  </section>
+
+  <section class="systems" aria-label="Yang dipantau">
+    <h2>Yang dipantau</h2>
+    <ul>
+      <li><strong>SIMKULIAH</strong> — <span>absensi 13 MK, Senin–Sabtu, dua akun (Dezz &amp; Rizki)</span></li>
+      <li><strong>Moodle USK</strong> — <span>elearning.usk.ac.id: linimasa + 12 mata kuliah, tugas &amp; kuis</span></li>
+      <li><strong>Google Classroom</strong> — <span>2 akun, stream + classwork per kelas</span></li>
+    </ul>
+    <p class="rules"><strong>Aturan keras:</strong> tugas/kuis/ujian tidak pernah
+      di-submit sebelum Dezz melihat draft dan mengonfirmasi. Absen boleh otomatis
+      karena time-sensitive. Sandi hanya dari vault terenkripsi (Fernet AES) —
+      tidak pernah di-chat, di-log, atau di file plain. Tidak ada secret di repo ini.</p>
+  </section>
+
+  <section class="schedule" aria-label="Lampiran register: jadwal kuliah">
+    <h2>Lampiran register — jadwal kuliah</h2>
+    <p class="contoh">Jadwal dari <code>data/jadwal-kuliah.json</code>. Sabtu 08:00
+      bentrok dua MK — keduanya dicek.</p>
+    <table>
+      <thead><tr><th>Hari</th><th>Jam</th><th>Kode</th><th>Mata kuliah</th><th>Kelas</th><th>Ruang</th><th>SKS</th></tr></thead>
+      <tbody>
+        <tr class="mk-row" data-hari="Senin"><td>Senin</td><td>14:00–15:40</td><td>SINF2007</td><td>Logika</td><td>B</td><td>E.02.07</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Selasa"><td>Selasa</td><td>09:50–11:30</td><td>SINF2019</td><td>Basis Data II</td><td>B</td><td>E.02.07</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Selasa"><td>Selasa</td><td>14:00–15:40</td><td>SINF2021</td><td>Praktikum Basis Data II</td><td>B</td><td>Lab. SI dan Database</td><td>1</td></tr>
+        <tr class="mk-row" data-hari="Rabu"><td>Rabu</td><td>08:00–09:40</td><td>SINF2015</td><td>Pemrograman Berorientasi Objek</td><td>A</td><td>E.02.07</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Rabu"><td>Rabu</td><td>14:00–15:40</td><td>SINF2009</td><td>Aljabar Linier</td><td>B</td><td>D.03.02</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Rabu"><td>Rabu</td><td>16:35–18:15</td><td>SINF2011</td><td>Komputasi Numerik</td><td>A</td><td>E.03.06</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Kamis"><td>Kamis</td><td>09:50–11:30</td><td>SINF2025</td><td>Praktikum Sistem Operasi</td><td>B</td><td>Lab. SI dan Database</td><td>1</td></tr>
+        <tr class="mk-row" data-hari="Kamis"><td>Kamis</td><td>16:35–18:15</td><td>SINF2023</td><td>Sistem Operasi</td><td>B</td><td>E.02.07</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Jumat"><td>Jumat</td><td>09:50–11:30</td><td>SINF2013</td><td>Praktikum Komputasi Numerik</td><td>A</td><td>Lab. SKJ</td><td>1</td></tr>
+        <tr class="mk-row" data-hari="Jumat"><td>Jumat</td><td>14:00–15:40</td><td>SINF2027</td><td>Interaksi Manusia dan Komputer</td><td>B</td><td>Aula Lab Terpadu</td><td>2</td></tr>
+        <tr class="mk-row" data-hari="Jumat"><td>Jumat</td><td>16:35–18:15</td><td>SINF2029</td><td>Praktikum IMK</td><td>B</td><td>Aula Lab Terpadu</td><td>1</td></tr>
+        <tr class="mk-row" data-hari="Sabtu"><td>Sabtu</td><td>08:00–09:40</td><td>SINF2017</td><td>Praktikum PBO</td><td>A</td><td>Lab. Data Sains dan AI</td><td>1</td></tr>
+        <tr class="mk-row" data-hari="Sabtu"><td>Sabtu</td><td>08:00–09:40</td><td>MKWU2001</td><td>Pendidikan Agama</td><td>M5</td><td>E.02.05</td><td>2</td></tr>
+      </tbody>
+    </table>
+    <p class="total">Total: 13 mata kuliah · 21 SKS</p>
+  </section>
+
+  <footer>
+    <p>Halaman ini etalase — produknya automation Python di repo, halaman ini
+      tidak absen dan tidak mengirim apa pun.</p>
+    <p><a href="https://github.com/dezzorigin/monitor-kuliah-dezz">github.com/dezzorigin/monitor-kuliah-dezz</a>
+      · Lisensi MIT · Dibangun dari buku log asli repo, 19 November 2026.</p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

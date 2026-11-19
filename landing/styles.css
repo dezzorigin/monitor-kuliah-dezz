@@ -1,0 +1,340 @@
+/* Monitor Kuliah Dezz — buku log / arsip absensi.
+   Palet (docs/DESIGN.md): Kertas Arsip #F2F0E6, Tinta #22271F,
+   Merah Cap #A63A2B, Biru Garis #33546D, Kuning Arsip #C99A2E,
+   Abu Pensil #8A8578. Radius 0 di semua permukaan. */
+:root {
+  --kertas: #F2F0E6;
+  --kertas-2: #EAE6D6;
+  --tinta: #22271F;
+  --merah: #A63A2B;
+  --biru: #33546D;
+  --kuning: #C99A2E;
+  --pensil: #8A8578;
+  --garis: #C9C2AC;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #DCD7C4;
+  color: var(--tinta);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ——— halaman buku ——— */
+.ledger {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 56px 48px 96px;
+  background: var(--kertas);
+  border-left: 3px solid var(--merah);
+  box-shadow: 0 0 0 1px #B9B29C, 8px 8px 0 0 rgba(34, 39, 31, 0.12);
+}
+
+/* lubang jilid */
+.holes {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+.holes span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--pensil);
+  border-radius: 50%;
+  background: #DCD7C4;
+  box-shadow: inset 0 0 0 3px var(--kertas);
+}
+
+.kicker {
+  font-family: "Special Elite", "Courier New", monospace;
+  color: var(--biru);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+h1 {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 60px);
+  line-height: 1.05;
+  margin: 0 0 8px;
+}
+
+.stamp-no {
+  font-family: "Special Elite", "Courier New", monospace;
+  color: var(--merah);
+  border: 2px solid var(--merah);
+  display: inline-block;
+  padding: 2px 10px;
+  transform: rotate(-2deg);
+  margin: 4px 0 16px;
+  font-size: 15px;
+}
+
+.cover-sub {
+  font-size: 18px;
+  max-width: 60ch;
+  margin: 0 0 24px;
+}
+
+.register-meta {
+  margin: 0 0 8px;
+  border-top: 2px solid var(--tinta);
+  border-bottom: 2px solid var(--tinta);
+  padding: 4px 0;
+}
+.register-meta div {
+  display: flex;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--garis);
+}
+.register-meta div:last-child { border-bottom: 0; }
+.register-meta dt {
+  flex: 0 0 140px;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 14px;
+  color: var(--biru);
+}
+.register-meta dd { margin: 0; font-weight: 600; }
+
+h2 {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 400;
+  font-size: 26px;
+  margin: 0 0 12px;
+}
+
+section { margin-top: 40px; }
+
+.contoh {
+  font-size: 13px;
+  color: var(--pensil);
+  font-family: "Libre Franklin", sans-serif;
+}
+
+/* ——— strip status ——— */
+.status-strip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--garis);
+}
+.status-strip li {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--garis);
+}
+.status-strip .lbl {
+  flex: 0 0 140px;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 14px;
+  color: var(--biru);
+}
+.warn { color: var(--merah); font-weight: 700; }
+
+/* ——— filter ——— */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+.filters button {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 15px;
+  background: transparent;
+  color: var(--tinta);
+  border: 1px solid var(--tinta);
+  padding: 8px 14px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.filters button:hover { background: var(--kertas-2); }
+.filters button.active {
+  background: var(--tinta);
+  color: var(--kertas);
+}
+.filters button:active { transform: scale(0.97); }
+
+.today-note {
+  font-family: "Special Elite", "Courier New", monospace;
+  background: var(--kuning);
+  color: var(--tinta);
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 8px 0 0;
+}
+.today-note:empty { display: none; }
+
+/* ——— entri log ——— */
+.log-entry {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--biru);
+}
+.log-entry.hidden { display: none; }
+.entry-time {
+  flex: 0 0 132px;
+  margin: 0;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--biru);
+}
+.entry-body { position: relative; flex: 1; min-width: 0; }
+.entry-cat {
+  margin: 0 0 4px;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pensil);
+}
+.log-entry h3 { font-size: 19px; margin: 0 0 6px; line-height: 1.35; }
+.log-entry p { margin: 0 0 8px; max-width: 68ch; }
+.log-entry code {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 14px;
+  background: var(--kertas-2);
+  padding: 1px 5px;
+}
+
+/* stempel status */
+.stamp {
+  display: inline-block;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--merah);
+  border: 2px solid var(--merah);
+  outline: 1px solid var(--merah);
+  outline-offset: 3px;
+  padding: 2px 10px;
+  transform: rotate(-3deg);
+  margin: 6px 0 0;
+}
+.stamp.terkumpul { color: var(--biru); border-color: var(--biru); outline-color: var(--biru); }
+.stamp.perlu { color: var(--kuning); border-color: var(--kuning); outline-color: var(--kuning); }
+
+/* ——— cara kerja ——— */
+.how ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: langkah;
+}
+.how li {
+  counter-increment: langkah;
+  padding: 14px 0 14px 56px;
+  position: relative;
+  border-bottom: 1px solid var(--garis);
+  max-width: 72ch;
+}
+.how li::before {
+  content: counter(langkah, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 14px;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 22px;
+  color: var(--merah);
+}
+.how code, .systems code {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 14px;
+  background: var(--kertas-2);
+  padding: 1px 5px;
+}
+
+/* ——— sistem ——— */
+.systems ul { list-style: none; margin: 0 0 16px; padding: 0; }
+.systems li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--garis);
+  display: flex;
+  gap: 16px;
+}
+.systems li strong {
+  flex: 0 0 170px;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 400;
+  color: var(--biru);
+}
+.rules {
+  border: 2px solid var(--merah);
+  padding: 14px 16px;
+  margin: 0;
+  max-width: 72ch;
+}
+
+/* ——— jadwal ——— */
+.schedule table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.schedule th, .schedule td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--garis);
+  font-variant-numeric: tabular-nums;
+}
+.schedule th {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 400;
+  color: var(--biru);
+  border-bottom: 2px solid var(--tinta);
+}
+.schedule tr.today { background: var(--kuning); }
+.schedule tr.today td { border-bottom-color: var(--tinta); }
+.total {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 16px;
+  margin: 12px 0 0;
+}
+
+footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 2px solid var(--tinta);
+  font-size: 14px;
+  color: var(--pensil);
+}
+footer a { color: var(--biru); }
+footer p { margin: 0 0 6px; }
+
+a { color: var(--biru); }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--merah);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .ledger { padding: 28px 20px 36px 64px; }
+  .holes { left: 16px; }
+  .holes span { width: 16px; height: 16px; }
+  .log-entry { flex-direction: column; gap: 4px; }
+  .entry-time { flex: none; }
+  .register-meta div, .status-strip li, .systems li { flex-direction: column; gap: 2px; }
+  .register-meta dt, .status-strip .lbl, .systems li strong { flex: none; }
+  .schedule { overflow-x: auto; }
+  .schedule table { min-width: 560px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none; animation: none; }
+}

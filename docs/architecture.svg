@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560" font-family="monospace" font-size="13">
+  <rect width="880" height="560" fill="#F2F0E6"/>
+  <text x="24" y="34" font-size="18" font-weight="bold" fill="#22271F">Monitor Kuliah Dezz — arsitektur</text>
+  <text x="24" y="56" font-size="12" fill="#8A8578">Cron Hermes (VPS) + skrip Python + vault Fernet — tanpa server sendiri</text>
+
+  <!-- cron -->
+  <rect x="24" y="80" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="38" y="108" font-weight="bold" fill="#22271F">CRON HERMES</text>
+  <text x="38" y="128" fill="#33546D">absen-watcher tiap 10 mnt</text>
+  <text x="38" y="146" fill="#33546D">monitor-tugas 4x/hari</text>
+
+  <!-- gate -->
+  <rect x="268" y="80" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="282" y="108" font-weight="bold" fill="#22271F">absen_gate.py</text>
+  <text x="282" y="128" fill="#33546D">di luar jam → "idle"</text>
+  <text x="282" y="146" fill="#33546D">di dalam jam → MK aktif</text>
+
+  <!-- login -->
+  <rect x="512" y="80" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="526" y="108" font-weight="bold" fill="#22271F">simkuliah_login.py</text>
+  <text x="526" y="128" fill="#33546D">requests.Session + captcha</text>
+  <text x="526" y="146" fill="#33546D">OCR ddddocr lokal (5 digit)</text>
+
+  <!-- arrows row 1 -->
+  <line x1="224" y1="123" x2="268" y2="123" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="468" y1="123" x2="512" y2="123" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- vault -->
+  <rect x="736" y="80" width="120" height="86" fill="#EAE6D6" stroke="#A63A2B" stroke-width="2"/>
+  <text x="750" y="108" font-weight="bold" fill="#A63A2B">VAULT</text>
+  <text x="750" y="128" fill="#22271F">Fernet AES</text>
+  <text x="750" y="146" fill="#22271F">sandi NPM</text>
+  <line x1="712" y1="110" x2="736" y2="110" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- run -->
+  <rect x="268" y="210" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="282" y="238" font-weight="bold" fill="#22271F">absen_run.py</text>
+  <text x="282" y="258" fill="#33546D">GET /absensi → parse tombol</text>
+  <text x="282" y="276" fill="#33546D">POST konfirmasi_kehadiran</text>
+  <line x1="612" y1="166" x2="612" y2="210" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="512" y1="253" x2="468" y2="253" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- state -->
+  <rect x="512" y="210" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="526" y="238" font-weight="bold" fill="#22271F">absen_state.json</text>
+  <text x="526" y="258" fill="#33546D">done / pending per akun</text>
+  <text x="526" y="276" fill="#33546D">dedupe tugas (hash)</text>
+  <line x1="468" y1="253" x2="512" y2="253" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- moodle -->
+  <rect x="24" y="210" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="38" y="238" font-weight="bold" fill="#22271F">MOODLE + GCR</text>
+  <text x="38" y="258" fill="#33546D">linimasa /my/ + 12 course</text>
+  <text x="38" y="276" fill="#33546D">stream + classwork</text>
+  <line x1="224" y1="253" x2="268" y2="253" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- pdf -->
+  <rect x="24" y="340" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="38" y="368" font-weight="bold" fill="#22271F">generate_pdfs.py</text>
+  <text x="38" y="388" fill="#33546D">ReportLab: 3 PDF draft</text>
+  <text x="38" y="406" fill="#33546D">metadata disanitasi</text>
+  <line x1="124" y1="296" x2="124" y2="340" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- discord -->
+  <rect x="268" y="340" width="200" height="86" fill="#FFFFFF" stroke="#22271F" stroke-width="2"/>
+  <text x="282" y="368" font-weight="bold" fill="#22271F">DISCORD</text>
+  <text x="282" y="388" fill="#33546D">#monitor-kuliah-dezz</text>
+  <text x="282" y="406" fill="#33546D">laporan MK | tugas | deadline</text>
+  <line x1="368" y1="296" x2="368" y2="340" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- landing -->
+  <rect x="512" y="340" width="344" height="86" fill="#FFFFFF" stroke="#33546D" stroke-width="2"/>
+  <text x="526" y="368" font-weight="bold" fill="#22271F">LANDING (etalase statis)</text>
+  <text x="526" y="388" fill="#33546D">landing/ → Cloudflare Pages</text>
+  <text x="526" y="406" fill="#33546D">buku log + jadwal 13 MK — tanpa kredensial</text>
+  <line x1="612" y1="296" x2="612" y2="340" stroke="#A63A2B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- guard -->
+  <rect x="24" y="470" width="832" height="64" fill="#EAE6D6" stroke="#A63A2B" stroke-width="2"/>
+  <text x="38" y="496" font-weight="bold" fill="#A63A2B">ATURAN KERAS</text>
+  <text x="38" y="518" fill="#22271F">Submit tugas/kuis/ujian HANYA setelah Dezz mengonfirmasi draft. Absen boleh otomatis (time-sensitive). Sandi hanya dari vault — tidak pernah di-chat / di-log / di file plain.</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#A63A2B"/>
+    </marker>
+  </defs>
+</svg>
