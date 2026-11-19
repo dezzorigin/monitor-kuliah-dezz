@@ -8,7 +8,6 @@ Usage: python3 scripts/check-static.py
 """
 import os
 import re
-import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANDING = os.path.join(ROOT, "landing")

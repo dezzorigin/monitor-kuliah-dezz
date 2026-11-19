@@ -19,7 +19,6 @@ Pemakaian:
 """
 import argparse
 import os
-import sys
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter

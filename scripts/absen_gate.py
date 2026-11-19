@@ -11,7 +11,6 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from check_schedule import HARI_MAP, TZ, load_jadwal  # noqa: E402
