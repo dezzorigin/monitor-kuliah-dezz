@@ -1,0 +1,13 @@
+# Dependensi produksi Monitor Kuliah Dezz — dipin eksplisit.
+# Versi = rilis terbaru PyPI per 2026-11-19 (dicek via pypi.org/json).
+# Di-sweep HIGH/CRITICAL di CI oleh scripts/advisory-sweep.py (OSV, PyPI).
+# ddddocr + reportlab + pypdf opsional di sebagian runtime (captcha OCR
+# lokal, PDF draft, verifikasi sanitasi), tapi tetap dipin + di-sweep
+# karena terpasang di venv automation.
+requests==2.34.2
+urllib3==2.8.0
+cryptography==50.0.2
+ddddocr==1.6.1
+pillow==13.0.0
+reportlab==5.1.0
+pypdf==7.1.1

@@ -1,0 +1,1 @@
+{"description":"Etalase statis Monitor Kuliah Dezz (buku log) + e2e Playwright — dev-only, tidak di-deploy.","devDependencies":{"@playwright/test":"^1.49.0"},"name":"monitor-kuliah-dezz-landing","private":true,"scripts":{"e2e":"playwright test"},"version":"1.0.0"}

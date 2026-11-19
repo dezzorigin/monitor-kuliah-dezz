@@ -1,9 +1,43 @@
+# Kredensial & rahasia — JANGAN PERNAH di-commit
 .env
 .env.*
-node_modules/
-.next/
+*.key
+*.enc
+vault.json
+vault/
+credentials*.json
+
+# State & bukti operasi (berisi data akun nyata — hanya di server)
+state.json
+absen_state.json
+jadwal.json
+# ...kecuali file CONTOH di repo ini (template + fixture, aman di-commit):
+!data/templates/state.json
+!data/templates/absen_state.json
+evidence/
+tmp/
+drafts/
+resources/
+
+# Python
 __pycache__/
+*.py[cod]
 .venv/
+.venv-captcha/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+
+# Node (landing e2e dev-only)
+node_modules/
+package-lock.json
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Build / OS
+.next/
 dist/
 build/
 .DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="utf-8"><title>Absensi — SIMKULIAH (contoh)</title></head>
+<body>
+<h1>Absensi Mahasiswa</h1>
+<p>Login sebagai: NABIL AULIA DIKA (250810701100090)</p>
+<p>Anda belum absen — Batas Absen 09:40 WIB</p>
+<table>
+  <tr><th>Kode</th><th>Mata Kuliah</th><th>Kelas</th><th>Jam</th><th>Status</th></tr>
+  <tr><td>SINF2015</td><td>PEMROGRAMAN BERORIENTASI OBJEK</td><td>A</td><td>08:00–09:40</td><td>
+    <button class="btn btn-primary" id="konfirmasi-kehadiran-6819201">Konfirmasi Kehadiran</button>
+  </td></tr>
+  <tr><td>SINF2009</td><td>ALJABAR LINIER</td><td>B</td><td>14:00–15:40</td><td>Belum masuk waktu absen</td></tr>
+</table>
+<script>
+$("#konfirmasi-kehadiran-6819201").on("click", function() {
+    var kelas = 'A';
+    var kd_mt_kul_8 = 'SINF2015';
+    var jadwal_mulai = '08:00';
+    var jadwal_berakhir = '09:40';
+    var pertemuan = '7';
+    var sks_mengajar = '2';
+    var id = '6819201';
+    swal({ title: "Konfirmasi Kehadiran", text: "Apakah anda yakin ingin melakukan presensi kuliah ini?", type: "warning" });
+});
+</script>
+</body>
+</html>
