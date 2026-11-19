@@ -62,7 +62,6 @@ def post_login(sess, nim, password, token, captcha):
                         "captcha": captcha},
                   headers={"User-Agent": UA, "Referer": BASE + "/auth"},
                   verify=False, timeout=20, allow_redirects=True)
-    body = r.text.lower()
     if "/auth" in r.url and "dashboard" not in r.url.lower():
         return r, "gagal"
     return r, "ok"

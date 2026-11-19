@@ -21,13 +21,13 @@ import re
 import sys
 import time
 
-BASE = "https://simkuliah.usk.ac.id"
-UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
-
 import requests
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+BASE = "https://simkuliah.usk.ac.id"
+UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
 
 _OCR = None
 
@@ -138,7 +138,8 @@ if __name__ == "__main__":
     sess, log = login(user, pw)
     print("\n".join(log))
     if not sess:
-        print("LOGIN GAGAL setelah semua retry"); sys.exit(1)
+        print("LOGIN GAGAL setelah semua retry")
+        sys.exit(1)
     html, tombol = absen_terbuka(sess)
     print(f"login OK; tombol presensi terdeteksi: {len(tombol)}")
     for t in tombol:

@@ -324,6 +324,7 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 640px) {
   .ledger { padding: 28px 20px 36px 64px; }
+  h1 { font-size: 34px; overflow-wrap: break-word; }
   .holes { left: 16px; }
   .holes span { width: 16px; height: 16px; }
   .log-entry { flex-direction: column; gap: 4px; }
