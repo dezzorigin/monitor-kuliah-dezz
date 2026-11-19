@@ -16,6 +16,7 @@ export default defineConfig({
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
-    { name: "mobile", use: { ...devices["iPhone 13"] } },
+    // Pixel 7 (Chromium) — JANGAN iPhone: butuh WebKit, CI hanya install Chromium.
+    { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
 });
